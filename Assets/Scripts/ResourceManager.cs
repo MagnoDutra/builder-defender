@@ -1,10 +1,14 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance { get; private set; }
+
+    public event EventHandler OnResourceAmountChanged;
     private Dictionary<ResourceTypeSO, int> resourcesAmountDict;
 
     private void Awake()
@@ -25,21 +29,16 @@ public class ResourceManager : MonoBehaviour
         {
             resourcesAmountDict[resourceType] = 0;
         }
-
-        TestLogResourceAmountDictionary();
-    }
-
-    public void TestLogResourceAmountDictionary()
-    {
-        foreach (ResourceTypeSO resourceType in resourcesAmountDict.Keys)
-        {
-            Debug.Log($"{resourceType.resourceName}: {resourcesAmountDict[resourceType]}");
-        }
     }
 
     public void AddResource(ResourceTypeSO resourceType, int amount)
     {
         resourcesAmountDict[resourceType] += amount;
-        TestLogResourceAmountDictionary();
+        OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public int GetResourceAmount(ResourceTypeSO resourceType)
+    {
+        return resourcesAmountDict[resourceType];
     }
 }
