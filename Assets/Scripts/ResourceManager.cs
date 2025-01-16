@@ -4,10 +4,20 @@ using UnityEngine.InputSystem;
 
 public class ResourceManager : MonoBehaviour
 {
+    public static ResourceManager Instance { get; private set; }
     private Dictionary<ResourceTypeSO, int> resourcesAmountDict;
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         resourcesAmountDict = new Dictionary<ResourceTypeSO, int>();
 
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
@@ -17,16 +27,6 @@ public class ResourceManager : MonoBehaviour
         }
 
         TestLogResourceAmountDictionary();
-    }
-
-    private void Update()
-    {
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-        {
-            ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
-            AddResource(resourceTypeList.list[0], 2);
-            TestLogResourceAmountDictionary();
-        }
     }
 
     public void TestLogResourceAmountDictionary()
@@ -40,5 +40,6 @@ public class ResourceManager : MonoBehaviour
     public void AddResource(ResourceTypeSO resourceType, int amount)
     {
         resourcesAmountDict[resourceType] += amount;
+        TestLogResourceAmountDictionary();
     }
 }

@@ -5,4 +5,5 @@ public class BuildingTypeSO : ScriptableObject
 {
   public string towerName;
   public Transform prefab;
+  public ResourceGeneratorData resourceGeneratorData;
 }

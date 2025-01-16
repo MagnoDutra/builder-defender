@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5375143214332289077}
+  - component: {fileID: -7613124988492793128}
+  - component: {fileID: -6773555033874244317}
   m_Layer: 0
   m_Name: WoodHarvester
   m_TagString: Untagged
@@ -32,6 +34,31 @@ Transform:
   - {fileID: 5039211601033023936}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7613124988492793128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046698140680997317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b660e0f276749b28f1c0297b488100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6773555033874244317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046698140680997317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055ecb64918284d109836a581d461eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingType: {fileID: 11400000, guid: c58948f80c1be42cbbf8897e598d1802, type: 2}
 --- !u!1 &7343201450937080777
 GameObject:
   m_ObjectHideFlags: 0
