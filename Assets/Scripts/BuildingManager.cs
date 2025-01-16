@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -5,6 +6,14 @@ using UnityEngine.InputSystem;
 public class BuildingManager : MonoBehaviour
 {
     public static BuildingManager Instance { get; private set; }
+
+    public event EventHandler<OnSelectBuildingEventArgs> OnSelectBuilding;
+
+    public class OnSelectBuildingEventArgs : EventArgs
+    {
+        public BuildingTypeSO buildingType;
+    }
+
     private BuildingTypeListSO buildingTypeList;
     private BuildingTypeSO buildingType;
 
@@ -29,23 +38,15 @@ public class BuildingManager : MonoBehaviour
         {
             if (buildingType == null) { return; }
 
-            Vector3 mousePosWorld = GetMouseWorldPosition();
+            Vector3 mousePosWorld = UtilsClass.GetMouseWorldPosition();
             Instantiate(buildingType.prefab, mousePosWorld, Quaternion.identity);
         }
-    }
-
-    private Vector3 GetMouseWorldPosition()
-    {
-        Vector2 mousePosInPx = Mouse.current.position.ReadValue();
-        Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mousePosInPx);
-        mousePosWorld.z = 0;
-
-        return mousePosWorld;
     }
 
     public void SetSelectedBuilding(BuildingTypeSO buildingType)
     {
         this.buildingType = buildingType;
+        OnSelectBuilding?.Invoke(this, new OnSelectBuildingEventArgs { buildingType = buildingType });
     }
 
     public BuildingTypeSO GetSelectedBuilding()
