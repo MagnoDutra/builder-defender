@@ -7,7 +7,7 @@ public class BuildingManager : MonoBehaviour
     private BuildingTypeSO buildingType;
 
 
-    private void Start()
+    private void Awake()
     {
         buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
         buildingType = buildingTypeList.list[0];
