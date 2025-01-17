@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 public class BuildingTypeSelectUI : MonoBehaviour
 {
     [SerializeField] private Sprite arrowSprite;
+    [SerializeField] private List<BuildingTypeSO> ignoreBuildingTypeList;
 
     private Dictionary<BuildingTypeSO, Transform> btnTransformDictionary;
     private Transform arrowBtn;
@@ -39,6 +41,8 @@ public class BuildingTypeSelectUI : MonoBehaviour
         // Cria os botoes das construcoes
         foreach (BuildingTypeSO building in buildingList.list)
         {
+            if (ignoreBuildingTypeList.Contains(building)) continue;
+
             Transform btnTransform = Instantiate(btnTemplate, transform);
             btnTransform.gameObject.SetActive(true);
 
@@ -56,7 +60,13 @@ public class BuildingTypeSelectUI : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Start()
+    {
+        BuildingManager.Instance.OnSelectBuilding += BuildingManager_OnSelectBuilding;
+        UpdateActiveBuildingTypeButton();
+    }
+
+    private void BuildingManager_OnSelectBuilding(object sender, BuildingManager.OnSelectBuildingEventArgs e)
     {
         UpdateActiveBuildingTypeButton();
     }

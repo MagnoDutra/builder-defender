@@ -18,3 +18,6 @@ MonoBehaviour:
   resourceGeneratorData:
     timerMax: 1
     resourceType: {fileID: 11400000, guid: 4253d549026ce46d79665c14ee047c52, type: 2}
+    resourceDetectionRadius: 5
+    maxResourceAmount: 4
+  minConstructionRadius: 7
