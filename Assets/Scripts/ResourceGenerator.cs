@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class ResourceGenerator : MonoBehaviour
@@ -50,4 +51,8 @@ public class ResourceGenerator : MonoBehaviour
             ResourceManager.Instance.AddResource(resourceGeneratorData.resourceType, 1);
         }
     }
+
+    public ResourceGeneratorData GetResourceGeneratorData() => resourceGeneratorData;
+    public float GetTimerNormalized() => timer / timerMax;
+    public float GetAmountGeneratedPerSecond() => 1 / timerMax;
 }
